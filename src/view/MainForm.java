@@ -1,6 +1,11 @@
 package view;
 
+import java.io.File;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainForm extends javax.swing.JFrame {
 
@@ -128,6 +133,11 @@ public class MainForm extends javax.swing.JFrame {
         jRadioButton2.setText("lapok összértéke");
 
         jButton3.setText("Mentés");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Kilépés");
 
@@ -166,6 +176,11 @@ public class MainForm extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItem1.setText("Mentés");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Kilépés");
@@ -231,9 +246,59 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    selectFile();      
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        selectFile();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    
+    private void felugro(int button){
+        if(button==JOptionPane.OK_OPTION){
+                
+            }
+    }
+    
+    private void selectFile() {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.jpg, *.gif",new String[] { "jpg","gif" });
+        FileNameExtensionFilter filter1 = new FileNameExtensionFilter("*.txt", new String[] { "txt"});
+        chooser.setDialogTitle("Megnyitás");
+        chooser.addChoosableFileFilter(filter);
+        chooser.addChoosableFileFilter(filter1);
+        chooser.setFileFilter(filter1);
+        
+                    try {
+            File chooserFile = new File((new File(".").getCanonicalPath()));
+            chooser.setCurrentDirectory(chooserFile);
+            } catch (Exception e) {
+             // go with current directory.
+            }
+        
+                
+                
+                
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            String fn = chooser.getSelectedFile().getName();
+            String eu = chooser.getSelectedFile().getPath();
+            
+            Icon icon = new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
+            
+            int button  = JOptionPane.showConfirmDialog(rootPane, "Fájl neve:"+fn+"\nElérése:"+eu,"Kérdés", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon);
+            felugro(button);
+            
+            // read  and/or display the file somehow. ....
+        } else {
+            // user changed their mind
+        }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
