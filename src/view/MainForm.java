@@ -51,6 +51,11 @@ public class MainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BlackJack");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ellenfél"));
 
@@ -246,7 +251,7 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        
+        kilepes();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -259,11 +264,23 @@ public class MainForm extends javax.swing.JFrame {
         selectFile();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        kilepes();
+    }//GEN-LAST:event_formWindowClosing
+
     
     private void felugro(int button){
         if(button==JOptionPane.OK_OPTION){
                 
             }
+    }
+    
+    private void kilepes() {
+        Icon icon = new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
+        int gomb = JOptionPane.showConfirmDialog(rootPane, "Biztos kilép?", "KILÉPÉS", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon);
+        if (gomb == JOptionPane.OK_OPTION) {
+            System.exit(0);
+        }
     }
     
     private void selectFile() {
